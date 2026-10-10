@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSSアニメーションまとめ</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="title-box">
+        <h2 class="title"><span class="highright">TRANSITION</span>とは？</h2>
+        <h3 class="sub-title">CSSの状態が変化するとき、その変化をなめらかにする。</h3>
+    </div>
+
+    <div class="text-box">
+        <h3 class="sub-title">(1)ボタン</h3>
+        <p class="text">ボタンにマウスを乗せて、実際に動きを体験しよう。</p>
+    </div>
+
+    <ul class="button-list">
+        <li class="button-list-card">
+            <h4 class="card-title">色が変わる</h4>
+            <p class="card-text">background-color</p>
+            <div class="cta-box"><a href="#" class="iro">詳しくはこちら→</a> </div>
+
+            <div class="css-code">
+                <input type="checkbox" id="view-css01" class="css-input">
+                <label for="view-css01" class="view-box">VIEW CSS</label>
+                <div class="code-box">
+                    <div class="code-inner">
+                        <pre> <code> .iro {
+ transition: background-color 0.25s ease;
+ }
+
+ .iro:hover {
+ background-color: #FFC72C;
+ } </code> </pre>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li class="button-list-card">
+            <h4 class="card-title">背景が伸びる</h4>
+            <p class="card-text">::before+scalex</p>
+            <div class="cta-box"><a href="#" class="nobiru">詳しくはこちら→</a></div>
+            <div class="css-code">
+                <input type="checkbox" id="view-css02" class="css-input">
+                <label for="view-css02" class="view-box">VIEW CSS</label>
+                <div class="code-box">
+                    <div class="code-inner">
+                        <pre> <code> .nobiru {
+ position: relative;
+ overflow: hidden;
+ /* はみ出した背景を隠す */
+z-index: 0;
+}
+
+.nobiru::before {
+content: "";
+position: absolute;
+inset: 0;
+/* top/right/bottom/left: 0 のまとめ書き */
+z-index: -1;
+background-color: #FFC72C;
+transform: scaleX(0);
+/* 横幅0の状態からスタート */
+transform-origin: left;
+/* 左端を軸に伸ばす */
+transition: transform 0.3s ease;
+}
+
+.nobiru:hover::before {
+transform: scaleX(1);
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+        </li>
+
+        <li class="button-list-card">
+            <h4 class="card-title">浮かび上がる</h4>
+            <p class="card-text">translateY+box-shadow</p>
+            <div class="cta-box"><a href="#" class="ukabu">詳しくはこちら→</a></div>
+            <div class="css-code">
+                <input type="checkbox" id="view-css03" class="css-input">
+                <label for="view-css03" class="view-box">VIEW CSS</label>
+                <div class="code-box">
+                    <div class="code-inner">
+                        <pre> <code>.ukabu {
+box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.ukabu:hover {
+transform: translateY(-4px);
+box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}</code> </pre>
+                    </div>
+                </div>
+            </div>
+
+        </li>
+
+        <li class="button-list-card">
+            <h4 class="card-title">枠線が塗られる</h4>
+            <p class="card-text">border+background</p>
+            <div class="cta-box"><a class="cta-white" href="#">詳しくはこちら→</a></div>
+            <div class="css-code">
+                <input type="checkbox" id="view-css04" class="css-input">
+                <label for="view-css04" class="view-box">VIEW CSS</label>
+                <div class="code-box">
+                    <div class="code-inner">
+                        <pre> <code>.cta-white {
+color: #256AFF;
+background-color: #fff;
+border: 2px solid #256AFF;
+transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.cta-white:hover {
+background-color: #256AFF;
+color: #fff;
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li class="button-list-card">
+            <h4 class="card-title">矢印が進む</h4>
+            <p class="card-text">アイコンだけ動かす</p>
+            <div class="cta-box"><a href="#" class="yajirusi">詳しくはこちら<span class="icon">→</span></a></div>
+            <div class="css-code">
+                <input type="checkbox" id="view-css05" class="css-input">
+                <label for="view-css05" class="view-box">VIEW CSS</label>
+                <div class="code-box">
+                    <div class="code-inner">
+                        <pre><code>.yajirusi .icon {
+display: inline-block;
+transition: transform 0.25s ease;
+}
+
+.yajirusi:hover .icon {
+transform: translateX(6px);
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+        </li>
+        <li class="button-list-card">
+            <h4 class="card-title">光が走る</h4>
+            <p class="card-text">::after+translateX</p>
+            <div class="cta-box"><a href="#" class="hikaru">詳しくはこちら→</a></div>
+            <div class="css-code">
+                <input type="checkbox" id="view-css06" class="css-input">
+                <label for="view-css06" class="view-box">VIEW CSS</label>
+                <div class="code-box">
+                    <div class="code-inner">
+                        <pre><code>.hikaru {
+position: relative;
+display: inline-block;
+overflow: hidden;
+}
+
+.hikaru::after {
+content: "";
+position: absolute;
+top: -50%;
+left: 0;
+width: 30%;
+height: 200%;
+background: linear-gradient(90deg,
+                                transparent,
+                                rgba(255, 255, 255, 0.7),
+                                transparent);
+transform: translateX(-150%) rotate(20deg);
+ transition: transform 0.4s ease;
+}
+                    
+.hikaru:hover::after {
+transform: translateX(400%) rotate(20deg);
+transition: transform 0.5s ease
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+        </li>
+    </ul>
+
+    <!-- テキストリンクの下線-->
+    <div class="text-box">
+        <h3 class="sub-title">（２）テキストリンクの下線</h3>
+        <p class="text">text-decorationではなく疑似要素で線を引くと、伸び方をコントロールできます。</p>
+        <p>3つのリンクにマウスを乗せてみよう。</p>
+    </div>
+
+    <!-- 左から伸びる -->
+    <ul class="button-list">
+        <li class="button-list-card">
+            <h4 class="card-title">左から伸びる</h4>
+            <div class="text-link">
+                <a class="link link-left">マウスを乗せる</a>
+            </div>
+            <div class="css-code">
+                <input type="checkbox" id="view-css07" class="css-input">
+                <label for="view-css07" class="view-box">VIEW CSS</label>
+                <div class="code-box">
+                    <div class="code-inner">
+                        <pre> <code> 
+*/「マウスを乗せる」にlinkとlink-leftのクラス名をつける*/
+
+.link{
+    position: relative;
+}
+
+.link::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 2px;
+    background-color: #FFC72C;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+/* 左から伸びる */
+.link-left::after{
+    transform-origin: left;
+}
+
+.link:hover::after{
+    transform: scaleX(1);
+ } 
+</code> </pre>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <!-- 中央から伸びる -->
+        <li class="button-list-card">
+            <h4 class="card-title">中央から伸びる</h4>
+            <div class="text-link">
+                <a class="link link-center">マウスを乗せる</a>
+            </div>
+            <div class="css-code">
+                <input type="checkbox" id="view-css08" class="css-input">
+                <label for="view-css08" class="view-box">VIEW CSS</label>
+                <div class="code-box">
+                    <div class="code-inner">
+                        <pre> <code> 
+ */「マウスを乗せる」にlinkとlink-centerのクラス名をつける*/
+
+.link{
+    position: relative;
+}
+
+.link::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 2px;
+    background-color: #FFC72C;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+/* 中央から伸びる */
+.link-center::after{
+    transform-origin: center;
+}
+
+.link:hover::after{
+    transform: scaleX(1);
+ }</code> </pre>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li class="button-list-card">
+            <h4 class="card-title">線が通り抜ける</h4>
+            <div class="text-link">
+                <a class="link link-through">マウスを乗せる</a>
+            </div>
+            <div class="css-code">
+                <input type="checkbox" id="view-css09" class="css-input">
+                <label for="view-css09" class="view-box">VIEW CSS</label>
+                <div class="code-box">
+                    <div class="code-inner">
+                        <pre> <code> 
+ */「マウスを乗せる」にlinkとlink-throughのクラス名をつける*/
+
+ .link{
+    position: relative;
+}
+
+.link::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 2px;
+    background-color: #FFC72C;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+/* 線が通り抜ける */
+.link-through::after{
+transform-origin: right;
+}
+
+.link-through:hover::after{
+    transform-origin: left;
+    transform: scaleX(1);
+}</code> </pre>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+    </ul>
+
+    <!-- カードのホバー -->
+    <div class="text-box">
+        <h3 class="sub-title">（３）カードのホバー（画像のズーム+オーバーレイ）</h3>
+        <p class="text">親要素の :hover をきっかけに、中の複数の要素をまとめて動かすパターンです。 時間差（delay）をつけると上質に見えます。</p>
+        <p>3つのカードにマウスを乗せてみよう。</p>
+    </div>
+    <ul class="button-list">
+        <li class="hover-card overlay">
+            <div class="card-img img-zoom">
+                <img src="images/about1.jpg" alt="画像ズーム">
+            </div>
+            <div class="hover-card-text">
+                <h4 class="card-title">画像ズーム</h4>
+                <p>画像だけを拡大し、枠からはみ出さないようoverflow: hiddenで切り取る</p>
+                <div class="css-code">
+                    <input type="checkbox" id="view-css10" class="css-input">
+                    <label for="view-css10" class="view-box">VIEW CSS</label>
+                    <div class="code-box">
+                        <div class="code-inner">
+                            <pre> <code> 
+ */画像をimg-zoomで囲む*/
+.img-zoom {
+    overflow: hidden;
+}
+
+.hover-card .img-zoom img {
+    transition: transform 0.3s ease;
+}
+
+.hover-card:hover .img-zoom img {
+    transform: scale(1.12);
+}
+*/タイトルの色が変わる設定*/
+.card-title {
+    transition: color 0.3s ease;
+}
+
+.hover-card:hover .card-title {
+    color: var(--main-color);
+}
+*/imgをcard-imgで囲む*/
+.card-img {
+    position: relative;
+    overflow: hidden;
+}
+
+.card-img img {
+    display: block;
+}
+
+.card-img::after {
+    content: "VIEW MORE";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(255, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.hover-card:hover .card-img::after {
+    opacity: 1;
+}
+
+ </code> </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li class="hover-card uku-card overlay">
+            <div class="card-img"><img src="images/about2.jpg" alt="カード全体が浮く"></div>
+            <div class="hover-card-text">
+                <h4 class="card-title">カード全体が浮く</h4>
+                <p>カード自体を持ち上げ、影を強くすることでクリックできる印象を与える</p>
+                <div class="css-code">
+                    <input type="checkbox" id="view-css11" class="css-input">
+                    <label for="view-css11" class="view-box">VIEW CSS</label>
+                    <div class="code-box">
+                        <div class="code-inner">
+                            <pre> <code> 
+ */カード全体にuku-cardというクラス名をつける*/
+.uku-card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.uku-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+*/タイトルの色が変わる設定*/
+.card-title {
+    transition: color 0.3s ease;
+}
+
+.hover-card:hover .card-title {
+    color: var(--main-color);
+}
+
+*/imgをcard-imgで囲む*/
+.card-img {
+    position: relative;
+    overflow: hidden;
+}
+
+.card-img img {
+    display: block;
+}
+
+.card-img::after {
+    content: "VIEW MORE";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(255, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.hover-card:hover .card-img::after {
+    opacity: 1;
+}
+
+</code> </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li class="hover-card gray-card">
+            <div class="gray-overlay"><img src="images/about3.jpg" alt="img-gray" class="img-gray"></div>
+            <div class="hover-card-text">
+                <h4 class="card-title">色が抜ける</h4>
+                <p>filter: graytscale()を使うと、モノクロ⇄カラーの切り替えも滑らかになる。</p>
+                <div class="css-code">
+                    <input type="checkbox" id="view-css12" class="css-input">
+                    <label for="view-css12" class="view-box">VIEW CSS</label>
+                    <div class="code-box">
+                        <div class="code-inner">
+                            <pre> <code> 
+*/画像にimg-grayとクラス名をつける*/
+.img-gray {
+    transition: filter 0.3s ease;
+}
+*/カード全体=gray-card*/
+.gray-card:hover .img-gray {
+    filter: grayscale(100%);
+}
+*/gray-overlayでimgを囲む*/
+.gray-overlay {
+    position: relative;
+}
+
+.gray-overlay::after {
+    content: "VIEW MORE";
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gray-card:hover .gray-overlay::after {
+    opacity: 1;
+}
+ </code> </pre>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </li>
+
+    </ul>
+
+    <!-- グローバルナビ＆ドロップダウン-->
+    <div class="text-box">
+        <h3 class="sub-title">（4）グローバルナビ＆ドロップダウン</h3>
+        <p class="text">メニューの開閉は opacity ＋ visibility ＋ transform の3点セットが定番です。 子項目に transition-delay をずらして与えると、順番に現れます。
+        </p>
+        <p>「ITEM」にマウスを乗せてみよう。</p>
+    </div>
+    <nav>
+        <ul class="nav-lists">
+            <li class="nav-list"><a href="">TOP</a></li>
+            <li class="nav-list"><a href="">ABOUT</a></li>
+            <li class="nav-list has-dropdown"><a href="">ITEM</a>
+                <ul class="dropdown">
+                    <li><a href="">アウター</a></li>
+                    <li><a href="">トップス</a></li>
+                    <li><a href="">パンツ</a></li>
+                    <li><a href="">バック</a></li>
+                    <li><a href="">シューズ</a></li>
+
+                </ul>
+            </li>
+            <li class="nav-list"><a href="">ACCESS</a></li>
+
+        </ul>
+    </nav>
+    <div class="css-code">
+        <input type="checkbox" id="view-css13" class="css-input">
+        <label for="view-css13" class="view-box">VIEW CSS</label>
+        <div class="code-box">
+            <div class="code-inner">
+                <pre> <code> 
+/* ITEMにドロップダウン専用のクラス名をつける */
+.has-dropdown {
+    position: relative;
+}
+
+/* ドロップダウン本体 */
+.dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 150px;
+    background-color: #fff;
+    z-index: 10;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease,
+        transform 0.3s ease;
+}
+
+/* ITEMをホバーした時、ドロップダウンを表示 */
+.has-dropdown:hover .dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* ドロップダウン内のリスト */
+.dropdown li {
+    opacity: 0;
+    transform: translateY(-5px);
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+}
+
+/* ITEMをホバーした時、リストを表示 */
+.has-dropdown:hover .dropdown li {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* リストを時間差で表示 */
+.dropdown li:nth-child(1) {
+    transition-delay: 0.05s;
+}
+
+.dropdown li:nth-child(2) {
+    transition-delay: 0.1s;
+}
+
+.dropdown li:nth-child(3) {
+    transition-delay: 0.15s;
+}
+
+.dropdown li:nth-child(4) {
+    transition-delay: 0.2s;
+}
+
+.dropdown li:nth-child(5) {
+    transition-delay: 0.25s;
+}             </code> </pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- 入力フォームのフォーカス -->
+    <div class="text-box">
+        <h3 class="sub-title">（５）フォームのフォーカス演出</h3>
+        <p class="text">入力欄は「いま入力している場所」を伝えることが最重要です。 :focus をきっかけに枠線とラベルを動かします。
+        </p>
+        <p>入力欄をクリックしてみよう。ラベルが上に移動するよ。</p>
+    </div>
+
+    <div class="form-item">
+        <input type="text" id="name" name="name" required>
+        <label for="name">お名前</label>
+    </div>
+
+    <div class="css-code">
+        <input type="checkbox" id="view-css14" class="css-input">
+        <label for="view-css14" class="view-box">VIEW CSS</label>
+        <div class="code-box">
+            <div class="code-inner">
+                <pre> <code> 
+/* 入力フォーム */
+/*input,labelの順でhtmlに入力すること（form-itemで囲む）
+.form-item {
+    position: relative;
+    width: 300px;
+}
+
+.form-item input {
+    width: 100%;
+    padding: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-item label {
+    position: absolute;
+    left: 15px;
+    top: 13px;
+    color: #999;
+    transition: 0.2s;
+    pointer-events: none;
+}
+
+/* フォーカス中 または 入力済み */
+.form-item input:focus+label,
+.form-item input:valid+label {
+    top: -10px;
+    left: 10px;
+    background-color: #fff;
+    padding: 0 5px;
+    color: #256AFF;
+    font-size: 12px;
+}
+
+.form-item input:focus {
+    border-color: #256AFF;
+    outline: none;
+}             </code> </pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- トグルスイッチ -->
+    <div class="text-box">
+        <h3 class="sub-title">（6）トグルスイッチ</h3>
+        <p class="text">チェックボックスを隠し、:checked をきっかけに丸を移動させます。 JavaScript は不要です。
+        </p>
+        <p>スイッチをクリックしてみよう。</p>
+    </div>
+    <label class="toggle">
+        <input type="checkbox">
+        <span class="toggle-slider"></span>
+    </label>
+
+    <div class="css-code">
+        <input type="checkbox" id="view-css15" class="css-input">
+        <label for="view-css15" class="view-box">VIEW CSS</label>
+        <div class="code-box">
+            <div class="code-inner">
+                <pre> <code> 
+/* トグルスイッチ */
+/*-----html-----*/
+&lt;label class="toggle"&gt;
+  &lt;input type="checkbox"&gt;
+  &lt;span class="toggle-slider"&gt;&lt;/span&gt;
+&lt;/label&gt;
+/*-----html-----*/
+
+.toggle{
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 32px;
+}
+
+.toggle input{
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider{
+    position: absolute;
+    inset: 0;
+    background: #ccc;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* 丸い部分 */
+.toggle-slider::before{
+    content: "";
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    left: 4px;
+    top: 4px;
+    background-color: var(--main-color);
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+/* ONになったとき */
+.toggle input:checked + .toggle-slider{
+background-color: var(--sub-color);
+}
+
+/* ONになっとき、丸を右へ */
+.toggle input:checked + .toggle-slider::before{
+    transform: translateX(28px);
+}
+        </code> </pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- アコーディオン -->
+    <div class="text-box">
+        <h3 class="sub-title">（7）アコーディオン</h3>
+        <p class="text">height: auto はアニメーションできませんが、 Grid の grid-template-rows: 0fr → 1fr を使うと、 中身の高さがいくつでもなめらかに開閉できます。
+        </p>
+        <p>質問をクリックして開いてください。</p>
+    </div>
+
+    <div class="accordion">
+        <input type="checkbox" id="acc01" class="acc-input">
+        <label for="acc01" class="acc-title">
+            毎日投稿何日目ですか？
+        </label>
+
+        <div class="acc-body">
+            <div class="acc-inner">
+                <p>
+                    今日は57日目です。
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="css-code">
+        <input type="checkbox" id="view-css16" class="css-input">
+
+        <label for="view-css16" class="view-box">
+            VIEW CSS
+        </label>
+
+        <div class="code-box">
+            <div class="code-inner">
+                <pre><code>
+/*-----html-----*/
+&lt;div class="accordion"&gt;
+    &lt;input type="checkbox" id="acc01" class="acc-input"&gt;
+    &lt;label for="acc01" class="acc-title"&gt;
+        毎日投稿何日目ですか？
+    &lt;/label&gt;
+
+    &lt;div class="acc-body"&gt;
+        &lt;div class="acc-inner"&gt;
+            &lt;p&gt;
+                今日は57日目です。
+            &lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+/*-----html-----*/
+
+.accordion {
+    border: 1px solid #999;
+    border-radius: 16px;
+}
+
+.acc-input {
+    display: none;
+}
+
+.acc-title {
+    position: relative;
+    font-weight: bold;
+    display: block;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.acc-title::after {
+    content: "+";
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    transition: transform 0.3s ease;
+}
+
+.acc-input:checked + .acc-title::after {
+    transform: translateY(-50%) rotate(45deg);
+}
+
+.acc-title:hover {
+    color: var(--main-color);
+}
+
+.acc-body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease;
+}
+
+.acc-inner {
+    overflow: hidden;
+}
+
+.acc-input:checked ~ .acc-body {
+    grid-template-rows: 1fr;
+}
+
+.acc-inner p {
+    margin: 0;
+    padding: 20px;
+}
+            </code></pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- アニメーション -->
+    <div class="title-box">
+        <h2 class="title"><span class="highright">animation</span>とは？</h2>
+        <h3 class="sub-title">時間の流れに沿って、要素を自動的に動かす。</h3>
+    </div>
+
+    <div class="text-box">
+        <h3 class="sub-title">（1）ローディング表現 4種</h3>
+        <p class="text">「処理中である」ことを伝えるパーツです。ずっと動き続ける＝ animation の代表格です。
+        </p>
+    </div>
+    <ul class="button-list">
+        <li class="button-list-card">
+            <h4 class="card-title">スピナー</h4>
+            <p class="card-text">rotate + border</p>
+            <div class="animation-area">
+                <div class="spinner"></div>
+            </div>
+            <div class="css-code">
+                <input type="checkbox" id="view-css17" class="css-input">
+                <label for="view-css17" class="view-box">VIEW CSS</label>
+                <div class="code-box">
+                    <div class="code-inner">
+                        <pre> <code> 
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #ccc;
+    border-top-color: var(--main-color);
+    border-radius: 50%;
+
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg)
+    }
+}            </code></pre>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <!-- 3点ドット -->
+        <li class="button-list-card">
+            <h4 class="card-title">3点ドット</h4>
+            <p class="card-text">delay をずらす</p>
+            <div class="animation-area">
+                <div class="dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <div class="css-code">
+                <input type="checkbox" id="view-css18" class="css-input">
+                <label for="view-css18" class="view-box">VIEW CSS</label>
+                <div class="code-box">
+                    <div class="code-inner">
+                        <pre> <code> 
+.dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.dots span {
+    width: 10px;
+    height: 10px;
+    background-color: var(--main-color);
+    border-radius: 50%;
+
+    animation: dot 1s ease-in-out infinite;
+}
+
+.dots span:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.dots span:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+@keyframes dot {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}          </code></pre>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <!-- バー -->
+        <li class="button-list-card">
+            <h4 class="card-title">バー</h4>
+            <p class="card-text">overflow + translateX</p>
+            <div class="animation-area">
+                <div class="bar"></div>
+            </div>
+            <div class="css-code">
+                <input type="checkbox" id="view-css19" class="css-input">
+                <label for="view-css19" class="view-box">VIEW CSS</label>
+                <div class="code-box">
+                    <div class="code-inner">
+                        <pre> <code> 
+.bar {
+    position: relative;
+    width: 160px;
+    height: 6px;
+    background-color: #ccc;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.bar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40%;
+    height: 100%;
+    background-color: var(--main-color);
+    border-radius: 3px;
+
+    animation: slide 1.5s ease-in-out infinite;
+}
+
+@keyframes slide {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(250%);
+    }
+}          </code></pre>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <!-- 波紋（パルス） -->
+        <li class="button-list-card">
+            <h4 class="card-title">波紋（パルス）</h4>
+            <p class="card-text">scale + opacity</p>
+            <div class="animation-area">
+                <div class="pulse"></div>
+            </div>
+            <div class="css-code">
+                <input type="checkbox" id="view-css20" class="css-input">
+                <label for="view-css20" class="view-box">VIEW CSS</label>
+                <div class="code-box">
+                    <div class="code-inner">
+                        <pre> <code> 
+.pulse {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background-color: var(--main-color);
+    border-radius: 50%;
+}
+
+.pulse::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(--main-color);
+    border-radius: 50%;
+
+    animation: pulse 1.5s ease-out infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: scale(3);
+        opacity: 0;
+    }
+}          </code></pre>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+    <!-- スケルトンスクリーン（読み込み中の骨組み -->
+    <div class="text-box">
+        <h3 class="sub-title">(2)スケルトンスクリーン（読み込み中の骨組み） </h3>
+        <p class="text">表示待ちの間、コンテンツの形だけを見せる手法です。 グラデーションの位置をアニメーションさせて、光が流れているように見せます。
+        </p>
+    </div>
+
+    <ul class="button-list">
+        <div class="flex-box">
+            <li class="button-list-card skeleton-card" aria-busy="true" aria-label="読み込み中">
+                <div class="skeleton skeleton-title"></div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="animation-area skeleton skeleton-animation-area">
+                    <div class="skeleton skeleton-circle"></div>
+                </div>
+                <div class="skeleton skeleton-button"></div>
+            </li>
+            <div class="css-code">
+                <input type="checkbox" id="view-css21" class="css-input">
+                <label for="view-css21" class="view-box">VIEW CSS</label>
+                <div class="code-box">
+                    <div class="code-inner">
+                        <pre> <code> 
+.skeleton {
+    background: linear-gradient(90deg,
+            #e5e7eb 25%,
+            #f3f4f6 37%,
+            #e5e7eb 63%);
+    background-size: 400% 100%;
+    animation: skeleton-loading 1.4s ease infinite;
+}
+
+/* このスケルトンカードだけ中央揃え */
+.skeleton-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    /* 上下に引き伸ばさない */
+}
+
+/* h4 の代わり */
+.skeleton-title {
+    width: 45%;
+    height: 1.2em;
+    border-radius: 4px;
+}
+
+/* p の代わり */
+.skeleton-text {
+    width: 30%;
+    height: 0.9em;
+    margin-top: 10px;
+    border-radius: 4px;
+}
+
+/* animation-area の代わり */
+.skeleton-card .skeleton-animation-area {
+    width: 100%;
+    min-height: 240px;
+    border-radius: 4px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* .pulse の代わり */
+.skeleton-circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+/* VIEW CSS ボタンの代わり */
+.skeleton-button {
+    width: 90px;
+    height: 32px;
+    margin-top: 20px;
+    border-radius: 4px;
+}
+
+.skeleton-card .animation-area {
+    background-color: transparent;
+}
+
+.skeleton-card .skeleton-button {
+    align-self: flex-start;
+    /* このボタンだけ左揃え */
+}
+
+@keyframes skeleton-loading {
+    from {
+        background-position: 100% 0;
+    }
+
+    to {
+        background-position: 0 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .skeleton {
+        animation: none;
+    }
+}
+
+@media (max-width: 800px) {
+    .flex-box {
+        flex-direction: column;
+    }
+
+    .flex-box .button-list-card {
+        width: 300px;
+        flex-basis: auto;
+    }
+}              </code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </ul>
+
+    <!-- 登場演出（フィードイン＋時間差） -->
+    <div class="text-box">
+        <h3 class="sub-title">(3)登場演出（フィードイン＋時間差） </h3>
+        <p class="text">ページを開いたときにふわっと現れる演出です。 animation-delay をずらすと、順番に出てくる「ずらし（stagger）」になります。
+        </p>
+    </div>
+
+    <div class="image-list">
+        <img src="images/fadein1.png" alt="fadein-item" class="fadein-item">
+        <img src="images/fadein2.png" alt="fadein-item" class="fadein-item">
+        <img src="images/fadein3.png" alt="fadein-item" class="fadein-item">
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,1031 @@
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Hiragino Kaku Gothic Pro", "Noto Sans", sans-serif;
+    color: #000;
+    line-height: 1.5;
+    padding: 64px;
+}
+
+.title,
+.card-title {
+    font-family: "Hiragino Kaku Gothic Std", "Noto Sans", sans-serif;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.card-title,
+.sub-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.highright {
+    font-size: 64px;
+}
+
+.text {
+    font-size: 16px;
+}
+
+ul {
+    list-style: none;
+}
+
+.cta-box a {
+    text-decoration: none;
+    border-radius: 3rem;
+    padding: 1rem;
+    display: inline-block;
+    color: #fff;
+
+}
+
+.title-box {
+    background-color: var(--sub-color);
+    border: 2px solid #000;
+    padding: 1rem;
+    box-shadow: 5px 5px 0px rgba(0, 0, 0, 1);
+
+}
+
+.text-box {
+    padding-block: 24px;
+}
+
+/* 変数 */
+:root {
+    --main-color: #256AFF
+}
+
+:root {
+    --sub-color: #FFC72C
+}
+
+/* メイン */
+/* （１）ボタン */
+.button-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+}
+
+.button-list-card {
+    width: 300px;
+    min-width: 0;
+    min-height: 257px;
+    height: auto;
+    border: 2px solid #000;
+    background-color: #fff;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 5px 5px 0px rgba(0, 0, 0, 1);
+}
+
+/* css box改定 */
+.css-code {
+    width: 100%;
+    min-width: 0;
+    text-align: left;
+    padding-block: 16px;
+}
+
+.css-input {
+    display: none;
+}
+
+.view-box {
+    display: block;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* コード部分 */
+.code-box {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition:
+        grid-template-rows 0.4s ease,
+        opacity 0.3s ease;
+}
+
+.code-inner {
+    overflow: hidden;
+}
+
+/* チェックされたら開く */
+.css-input:checked~.code-box {
+    grid-template-rows: 1fr;
+    opacity: 1;
+}
+
+.code-box pre {
+    margin-top: 16px;
+    padding: 16px;
+    background-color: #222;
+    color: #fff;
+    white-space: pre;
+    overflow-x: auto;
+}
+
+.code-box code {
+    color: #fff;
+}
+
+/* ここまで */
+.cta-box {
+    padding-block: 24px;
+}
+
+/* カードの中にある VIEW CSS だけに線を引く */
+.button-list-card .css-code,
+.hover-card .css-code {
+    border-top: 1px solid #000;
+}
+
+/* 色が変わる */
+.iro {
+    transition: background-color 0.25s ease;
+    background-color: var(--main-color);
+}
+
+.iro:hover {
+    background-color: var(--sub-color);
+}
+
+/* 背景が伸びる */
+.nobiru {
+    background-color: var(--main-color);
+    position: relative;
+    overflow: hidden;
+    /* はみ出した背景を隠す */
+    z-index: 0;
+}
+
+.nobiru::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    /* top/right/bottom/left: 0 のまとめ書き */
+    z-index: -1;
+    background-color: var(--sub-color);
+    transform: scaleX(0);
+    /* 横幅0の状態からスタート */
+    transform-origin: left;
+    /* 左端を軸に伸ばす */
+    transition: transform 0.3s ease;
+}
+
+.nobiru:hover::before {
+    transform: scaleX(1);
+}
+
+/* 浮かび上がる */
+.ukabu {
+    background-color: var(--main-color);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.ukabu:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* 枠線が塗られる */
+.cta-white {
+    color: #256AFF !important;
+    background-color: #fff;
+    border: 2px solid #256AFF;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.cta-white:hover {
+    background-color: var(--main-color);
+    color: #fff !important;
+}
+
+/* 矢印が進む */
+.yajirusi {
+    background-color: var(--main-color);
+}
+
+.yajirusi .icon {
+    display: inline-block;
+    transition: transform 0.25s ease;
+}
+
+.yajirusi:hover .icon {
+    transform: translateX(6px);
+}
+
+/* 光が走る */
+.hikaru {
+    background-color: var(--main-color);
+    position: relative;
+
+    display: inline-block;
+
+    overflow: hidden;
+}
+
+.hikaru::after {
+    content: "";
+
+    position: absolute;
+
+    top: -50%;
+
+    left: 0;
+
+    width: 30%;
+
+    height: 200%;
+
+    background: linear-gradient(90deg,
+
+            transparent,
+
+            rgba(255, 255, 255, 0.7),
+
+            transparent);
+    transform: translateX(-150%) rotate(20deg);
+
+    transition: transform 0.4s ease;
+}
+
+.hikaru:hover::after {
+    transform: translateX(400%) rotate(20deg);
+    transition: transform 0.5s ease
+}
+
+/* テキストリンクの下線 */
+.text-link {
+    padding-block: 40px;
+    font-weight: bold;
+}
+
+.text-link a {
+    color: #256AFF;
+}
+
+.link {
+    position: relative;
+}
+
+.link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 2px;
+    background-color: var(--sub-color);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+
+.link:hover::after {
+    transform: scaleX(1);
+}
+
+/* 左から伸びる */
+.link-left::after {
+    transform-origin: left;
+}
+
+/* 中央から伸びる */
+.link-center::after {
+    transform-origin: center;
+}
+
+/* 線が通り抜ける */
+.link-through::after {
+    transform-origin: right;
+}
+
+.link-through:hover::after {
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
+/* ホバーカード */
+.hover-card {
+    border: 2px solid #000;
+    width: 334px;
+    min-width: 0;
+    min-height: 383px;
+    height: auto;
+}
+
+.hover-card img {
+    width: 100%;
+}
+
+.hover-card-text {
+    padding: 24px;
+}
+
+.hover-card-text .css-code {
+    margin-top: 16px;
+}
+
+.card-title {
+    transition: color 0.3s ease;
+}
+
+.hover-card:hover .card-title {
+    color: var(--main-color);
+}
+
+/* 画像ズーム */
+.img-zoom {
+    overflow: hidden;
+}
+
+.hover-card .img-zoom img {
+    transition: transform 0.3s ease;
+}
+
+.hover-card:hover .img-zoom img {
+    transform: scale(1.12);
+}
+
+/* カード全体が浮く */
+.uku-card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.uku-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* 色が抜ける */
+.img-gray {
+    transition: filter 0.3s ease;
+}
+
+.gray-card:hover .img-gray {
+    filter: grayscale(100%);
+}
+
+.card-img {
+    position: relative;
+    overflow: hidden;
+}
+
+.card-img img {
+    display: block;
+}
+
+.card-img::after {
+    content: "VIEW MORE";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(255, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.hover-card:hover .card-img::after {
+    opacity: 1;
+}
+
+
+.gray-overlay {
+    position: relative;
+}
+
+.gray-overlay::after {
+    content: "VIEW MORE";
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gray-card:hover .gray-overlay::after {
+    opacity: 1;
+}
+
+/* グローバルなび */
+
+.nav-lists {
+    display: flex;
+    gap: 16px;
+    background-color: var(--main-color);
+    padding: 6px;
+}
+
+.nav-lists,
+.dropdown {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-lists a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.nav-list {
+    padding: 16px;
+    position: relative;
+}
+
+.nav-list a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 10px;
+    width: 100%;
+    height: 2px;
+    transform-origin: left;
+    background-color: var(--sub-color);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+
+
+.nav-list>a:hover::after {
+    transform: scaleX(1);
+}
+
+.has-dropdown {
+    position: relative;
+}
+
+.has-dropdown>a::after {
+    display: none;
+}
+
+
+.dropdown {
+    position: absolute;
+    padding: 16px;
+    top: 100%;
+    left: 0;
+    width: 150px;
+    background-color: #fff;
+    z-index: 10;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease,
+        transform 0.3s ease;
+}
+
+.has-dropdown:hover .dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown li a {
+    display: block;
+    padding: 8px;
+    color: var(--main-color);
+    transition: background-color 0.3s ease;
+}
+
+
+.dropdown li a:hover {
+    background-color: var(--sub-color);
+    color: #fff;
+}
+
+.dropdown li {
+    padding-top: 8px;
+
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.has-dropdown:hover .dropdown li {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 1つ目 */
+.dropdown li:nth-child(1) {
+    transition-delay: 0.05s;
+}
+
+/* 2つ目 */
+.dropdown li:nth-child(2) {
+    transition-delay: 0.1s;
+}
+
+/* 3つ目 */
+.dropdown li:nth-child(3) {
+    transition-delay: 0.15s;
+}
+
+/* 4つ目 */
+.dropdown li:nth-child(4) {
+    transition-delay: 0.2s;
+}
+
+/* 5つ目 */
+.dropdown li:nth-child(5) {
+    transition-delay: 0.25s;
+}
+
+.view-box {
+    border: 2px solid #000;
+    display: inline-block;
+    background-color: #fff;
+    padding: 1rem;
+    box-shadow: 5px 5px 0px rgba(0, 0, 0, 1);
+}
+
+/* 入力フォーム */
+.form-item {
+    position: relative;
+    width: 300px;
+}
+
+.form-item input {
+    width: 100%;
+    padding: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-item label {
+    position: absolute;
+    left: 15px;
+    top: 13px;
+    color: #999;
+    transition: 0.2s;
+    pointer-events: none;
+}
+
+/* フォーカス中 または 入力済み */
+
+.form-item input:focus+label,
+.form-item input:valid+label {
+    top: -10px;
+    left: 10px;
+    background-color: #fff;
+    padding: 0 5px;
+    color: #256AFF;
+    font-size: 12px;
+}
+
+.form-item input:focus {
+    border-color: #256AFF;
+    outline: none;
+}
+
+/* トグルスイッチ */
+.toggle {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 32px;
+}
+
+.toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    inset: 0;
+    background: #ccc;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* 丸い部分 */
+.toggle-slider::before {
+    content: "";
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    left: 4px;
+    top: 4px;
+    background-color: var(--main-color);
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+/* ONになったとき */
+.toggle input:checked+.toggle-slider {
+    background-color: var(--sub-color);
+}
+
+/* ONになっとき、丸を右へ */
+.toggle input:checked+.toggle-slider::before {
+    transform: translateX(28px);
+}
+
+/* アコーディオン */
+.accordion {
+    border: 1px solid #999;
+    border-radius: 16px;
+    width: 500px;
+}
+
+.acc-input {
+    display: none;
+}
+
+.acc-title {
+    position: relative;
+    font-weight: bold;
+    display: block;
+    padding: 20px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+/* + */
+.acc-title::after {
+    content: "+";
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    transition: transform 0.3s ease;
+}
+
+/* チェック後は× */
+.acc-input:checked+.acc-title::after {
+    transform: translateY(-50%) rotate(45deg);
+}
+
+/* ホバー */
+.acc-title:hover {
+    color: var(--main-color);
+}
+
+.acc-body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease;
+}
+
+.acc-inner {
+    overflow: hidden;
+}
+
+.acc-input:checked~.acc-body {
+    grid-template-rows: 1fr;
+}
+
+.acc-inner p {
+    margin: 0;
+    padding: 20px;
+}
+
+/* アニメーション */
+/* スピナー */
+.animation-area {
+    background-color: #000000;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #ccc;
+    border-top-color: var(--main-color);
+    border-radius: 50%;
+
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg)
+    }
+}
+
+/* 3点ドット */
+.dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.dots span {
+    width: 10px;
+    height: 10px;
+    background-color: var(--main-color);
+    border-radius: 50%;
+
+    animation: dot 1s ease-in-out infinite;
+}
+
+.dots span:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.dots span:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+@keyframes dot {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+/* バー */
+.bar {
+    position: relative;
+    width: 160px;
+    height: 6px;
+    background-color: #ccc;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.bar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40%;
+    height: 100%;
+    background-color: var(--main-color);
+    border-radius: 3px;
+
+    animation: slide 1.5s ease-in-out infinite;
+}
+
+@keyframes slide {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(250%);
+    }
+}
+
+/* 波紋（パルス） */
+.pulse {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background-color: var(--main-color);
+    border-radius: 50%;
+}
+
+.pulse::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(--main-color);
+    border-radius: 50%;
+
+    animation: pulse 1.5s ease-out infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: scale(3);
+        opacity: 0;
+    }
+}
+
+/* スケルトーンスクリーン */
+.flex-box {
+    display: flex;
+    align-items: flex-start;
+    /* 上端をそろえる */
+    gap: 24px;
+    /* カードと VIEW CSS の間隔 */
+}
+
+.flex-box .button-list-card {
+    flex: 0 0 300px;
+}
+
+.flex-box .css-code {
+    flex: 1;
+    /* 残った横幅を使う */
+}
+
+.skeleton {
+    background: linear-gradient(90deg,
+            #e5e7eb 25%,
+            #f3f4f6 37%,
+            #e5e7eb 63%);
+    background-size: 400% 100%;
+    animation: skeleton-loading 1.4s ease infinite;
+}
+
+/* このスケルトンカードだけ中央揃え */
+.skeleton-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    /* 上下に引き伸ばさない */
+}
+
+/* h4 の代わり */
+.skeleton-title {
+    width: 45%;
+    height: 1.2em;
+    border-radius: 4px;
+}
+
+/* p の代わり */
+.skeleton-text {
+    width: 30%;
+    height: 0.9em;
+    margin-top: 10px;
+    border-radius: 4px;
+}
+
+/* animation-area の代わり */
+.skeleton-card .skeleton-animation-area {
+    width: 100%;
+    min-height: 240px;
+    border-radius: 4px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* .pulse の代わり */
+.skeleton-circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+/* VIEW CSS ボタンの代わり */
+.skeleton-button {
+    width: 90px;
+    height: 32px;
+    margin-top: 20px;
+    border-radius: 4px;
+}
+
+.skeleton-card .animation-area {
+    background-color: transparent;
+}
+
+.skeleton-card .skeleton-button {
+    align-self: flex-start;
+    /* このボタンだけ左揃え */
+}
+
+@keyframes skeleton-loading {
+    from {
+        background-position: 100% 0;
+    }
+
+    to {
+        background-position: 0 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .skeleton {
+        animation: none;
+    }
+}
+
+@media (max-width: 800px) {
+    .flex-box {
+        flex-direction: column;
+    }
+
+    .flex-box .button-list-card {
+        width: 300px;
+        flex-basis: auto;
+    }
+}
+
+/* 時間差登場 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(80px) scale(0.85);
+        filter: blur(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+.image-list {
+    display: flex;
+    gap: 16px;
+}
+
+.image-list img {
+    flex: 1;
+    min-width: 0;
+    height: auto;
+}
+
+/* ---------------------------------------------
+   スクロール量に合わせて表示（JSなし）
+   animation-timeline: view() で、アニメーションの進み具合を
+   「時間」ではなく「要素が画面のどこにいるか」に連動させる
+   → 速くスクロールすれば速く、止めれば途中で止まる
+   → 上に戻せば逆再生されるので、スクロールのたびに登場する
+   ※ スクロール連動では animation-delay（秒）は効かないので、
+     時間差は animation-range の開始・終了位置をずらして作る
+--------------------------------------------- */
+@supports (animation-timeline: view()) {
+    .fadein-item {
+        animation: fadeInUp linear both;
+        animation-timeline: view();
+    }
+
+    /* 時間差（stagger）：後の画像ほど遅い位置で始まる
+       終わりを entry 100%（画像が画面に入りきった位置）までに収めると、
+       ページ最下部の要素でも最後まで表示される */
+    .image-list .fadein-item:nth-child(1) {
+        animation-range: entry 0% entry 60%;
+    }
+
+    .image-list .fadein-item:nth-child(2) {
+        animation-range: entry 20% entry 80%;
+    }
+
+    .image-list .fadein-item:nth-child(3) {
+        animation-range: entry 40% entry 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .fadein-item {
+        opacity: 1;
+        animation: none !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .image-list {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .image-list img {
+        width: auto;
+        max-width: 280px;
+    }
+}
