@@ -1,5 +1,19 @@
 @charset "UTF-8";
 
+/* =============================================
+   変数
+============================================= */
+:root {
+    --main-color: #256AFF;
+    --sub-color: #FFC72C;
+    --border: 2px solid #000;
+    --shadow: 5px 5px 0 #000;
+    --page-padding: clamp(16px, 5vw, 64px);
+}
+
+/* =============================================
+   リセット・ベース
+============================================= */
 * {
     margin: 0;
     padding: 0;
@@ -10,9 +24,21 @@ body {
     font-family: "Hiragino Kaku Gothic Pro", "Noto Sans", sans-serif;
     color: #000;
     line-height: 1.5;
-    padding: 64px;
+    padding: var(--page-padding);
 }
 
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+}
+
+/* =============================================
+   共通パーツ
+============================================= */
+/* 見出し */
 .title,
 .card-title {
     font-family: "Hiragino Kaku Gothic Std", "Noto Sans", sans-serif;
@@ -20,7 +46,12 @@ body {
 
 .title {
     font-weight: bold;
-    font-size: 40px;
+    font-size: clamp(28px, 5vw, 40px);
+    line-height: 1.3;
+}
+
+.highright {
+    font-size: clamp(32px, 9vw, 64px);
 }
 
 .card-title,
@@ -29,50 +60,37 @@ body {
     font-weight: bold;
 }
 
-.highright {
-    font-size: 64px;
+.card-title {
+    transition: color 0.3s ease;
 }
 
 .text {
     font-size: 16px;
 }
 
-ul {
-    list-style: none;
+.text-accent {
+    color: var(--main-color);
+    font-weight: bold;
 }
 
-.cta-box a {
-    text-decoration: none;
-    border-radius: 3rem;
-    padding: 1rem;
-    display: inline-block;
-    color: #fff;
-
-}
-
+/* セクションの大見出し */
 .title-box {
     background-color: var(--sub-color);
-    border: 2px solid #000;
+    border: var(--border);
     padding: 1rem;
-    box-shadow: 5px 5px 0px rgba(0, 0, 0, 1);
-
+    box-shadow: var(--shadow);
 }
 
+/* 各項目の説明 */
 .text-box {
     padding-block: 24px;
 }
 
-/* 変数 */
-:root {
-    --main-color: #256AFF
+.section + .title-box {
+    margin-top: 64px;
 }
 
-:root {
-    --sub-color: #FFC72C
-}
-
-/* メイン */
-/* （１）ボタン */
+/* カード一覧 */
 .button-list {
     display: flex;
     flex-wrap: wrap;
@@ -82,17 +100,16 @@ ul {
 
 .button-list-card {
     width: 300px;
-    min-width: 0;
+    max-width: 100%;
     min-height: 257px;
-    height: auto;
-    border: 2px solid #000;
+    border: var(--border);
     background-color: #fff;
     padding: 1rem;
     text-align: center;
-    box-shadow: 5px 5px 0px rgba(0, 0, 0, 1);
+    box-shadow: var(--shadow);
 }
 
-/* css box改定 */
+/* VIEW CSS（チェックボックスで開閉） */
 .css-code {
     width: 100%;
     min-width: 0;
@@ -100,17 +117,26 @@ ul {
     padding-block: 16px;
 }
 
+/* カードの中にある VIEW CSS だけに線を引く */
+.button-list-card .css-code,
+.hover-card .css-code {
+    border-top: 1px solid #000;
+}
+
 .css-input {
     display: none;
 }
 
 .view-box {
-    display: block;
-    cursor: pointer;
+    display: inline-block;
+    padding: 1rem;
+    border: var(--border);
+    background-color: #fff;
+    box-shadow: var(--shadow);
     font-weight: bold;
+    cursor: pointer;
 }
 
-/* コード部分 */
 .code-box {
     display: grid;
     grid-template-rows: 0fr;
@@ -125,7 +151,7 @@ ul {
 }
 
 /* チェックされたら開く */
-.css-input:checked~.code-box {
+.css-input:checked ~ .code-box {
     grid-template-rows: 1fr;
     opacity: 1;
 }
@@ -137,27 +163,35 @@ ul {
     color: #fff;
     white-space: pre;
     overflow-x: auto;
+    font-size: 14px;
+    tab-size: 4;
 }
 
 .code-box code {
     color: #fff;
 }
 
-/* ここまで */
+/* =============================================
+   TRANSITION
+============================================= */
+
+/* ---------- （1）ボタン ---------- */
 .cta-box {
     padding-block: 24px;
 }
 
-/* カードの中にある VIEW CSS だけに線を引く */
-.button-list-card .css-code,
-.hover-card .css-code {
-    border-top: 1px solid #000;
+.cta-box a {
+    display: inline-block;
+    padding: 1rem;
+    border-radius: 3rem;
+    color: #fff;
+    text-decoration: none;
 }
 
 /* 色が変わる */
 .iro {
-    transition: background-color 0.25s ease;
     background-color: var(--main-color);
+    transition: background-color 0.25s ease;
 }
 
 .iro:hover {
@@ -166,11 +200,11 @@ ul {
 
 /* 背景が伸びる */
 .nobiru {
-    background-color: var(--main-color);
     position: relative;
     overflow: hidden;
     /* はみ出した背景を隠す */
     z-index: 0;
+    background-color: var(--main-color);
 }
 
 .nobiru::before {
@@ -204,16 +238,16 @@ ul {
 }
 
 /* 枠線が塗られる */
-.cta-white {
-    color: #256AFF !important;
+.cta-box .cta-white {
+    color: var(--main-color);
     background-color: #fff;
-    border: 2px solid #256AFF;
+    border: 2px solid var(--main-color);
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.cta-white:hover {
+.cta-box .cta-white:hover {
+    color: #fff;
     background-color: var(--main-color);
-    color: #fff !important;
 }
 
 /* 矢印が進む */
@@ -232,52 +266,40 @@ ul {
 
 /* 光が走る */
 .hikaru {
-    background-color: var(--main-color);
     position: relative;
-
-    display: inline-block;
-
     overflow: hidden;
+    background-color: var(--main-color);
 }
 
 .hikaru::after {
     content: "";
-
     position: absolute;
-
     top: -50%;
-
     left: 0;
-
     width: 30%;
-
     height: 200%;
-
     background: linear-gradient(90deg,
-
             transparent,
-
             rgba(255, 255, 255, 0.7),
-
             transparent);
     transform: translateX(-150%) rotate(20deg);
-
     transition: transform 0.4s ease;
 }
 
 .hikaru:hover::after {
     transform: translateX(400%) rotate(20deg);
-    transition: transform 0.5s ease
+    transition: transform 0.5s ease;
 }
 
-/* テキストリンクの下線 */
+/* ---------- （2）テキストリンクの下線 ---------- */
 .text-link {
     padding-block: 40px;
     font-weight: bold;
 }
 
 .text-link a {
-    color: #256AFF;
+    color: var(--main-color);
+    text-decoration: none;
 }
 
 .link {
@@ -295,7 +317,6 @@ ul {
     transform: scaleX(0);
     transition: transform 0.3s ease;
 }
-
 
 .link:hover::after {
     transform: scaleX(1);
@@ -318,19 +339,18 @@ ul {
 
 .link-through:hover::after {
     transform-origin: left;
-    transform: scaleX(1);
 }
 
-/* ホバーカード */
+/* ---------- （3）カードのホバー ---------- */
 .hover-card {
-    border: 2px solid #000;
     width: 334px;
-    min-width: 0;
+    max-width: 100%;
     min-height: 383px;
-    height: auto;
+    border: var(--border);
 }
 
 .hover-card img {
+    display: block;
     width: 100%;
 }
 
@@ -340,10 +360,6 @@ ul {
 
 .hover-card-text .css-code {
     margin-top: 16px;
-}
-
-.card-title {
-    transition: color 0.3s ease;
 }
 
 .hover-card:hover .card-title {
@@ -373,32 +389,20 @@ ul {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* 色が抜ける */
-.img-gray {
-    transition: filter 0.3s ease;
-}
-
-.gray-card:hover .img-gray {
-    filter: grayscale(100%);
-}
-
+/* VIEW MORE のオーバーレイ */
 .card-img {
     position: relative;
     overflow: hidden;
-}
-
-.card-img img {
-    display: block;
 }
 
 .card-img::after {
     content: "VIEW MORE";
     position: absolute;
     inset: 0;
-    background-color: rgba(255, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: rgba(255, 0, 0, 0.5);
     color: #fff;
     font-weight: bold;
     opacity: 0;
@@ -409,6 +413,14 @@ ul {
     opacity: 1;
 }
 
+/* 色が抜ける */
+.img-gray {
+    transition: filter 0.3s ease;
+}
+
+.gray-card:hover .img-gray {
+    filter: grayscale(100%);
+}
 
 .gray-overlay {
     position: relative;
@@ -432,68 +444,56 @@ ul {
     opacity: 1;
 }
 
-/* グローバルなび */
-
+/* ---------- （4）グローバルナビ＆ドロップダウン ---------- */
 .nav-lists {
     display: flex;
+    flex-wrap: wrap;
     gap: 16px;
     background-color: var(--main-color);
-    padding: 6px;
-}
-
-.nav-lists,
-.dropdown {
-    list-style: none;
-    margin: 0;
-    padding: 0;
 }
 
 .nav-lists a {
-    text-decoration: none;
     color: #fff;
+    text-decoration: none;
 }
 
 .nav-list {
-    padding: 16px;
     position: relative;
+    padding: 16px;
 }
 
-.nav-list a::after {
+/* 下線 */
+.nav-list > a::after {
     content: "";
     position: absolute;
     left: 0;
     bottom: 10px;
     width: 100%;
     height: 2px;
-    transform-origin: left;
     background-color: var(--sub-color);
     transform: scaleX(0);
+    transform-origin: left;
     transition: transform 0.3s ease;
 }
 
-
-
-.nav-list>a:hover::after {
+.nav-list > a:hover::after {
     transform: scaleX(1);
 }
 
-.has-dropdown {
-    position: relative;
-}
-
-.has-dropdown>a::after {
+/* ITEM には下線を出さない */
+.has-dropdown > a::after {
     display: none;
 }
 
-
+/* ドロップダウン本体 */
 .dropdown {
     position: absolute;
-    padding: 16px;
     top: 100%;
     left: 0;
-    width: 150px;
-    background-color: #fff;
     z-index: 10;
+    width: 150px;
+    padding: 16px;
+    background-color: #fff;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
     opacity: 0;
     visibility: hidden;
@@ -504,10 +504,46 @@ ul {
         transform 0.3s ease;
 }
 
-.has-dropdown:hover .dropdown {
+/* :focus-within … キーボード操作・スマホのタップでも開く */
+.has-dropdown:hover .dropdown,
+.has-dropdown:focus-within .dropdown {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
+}
+
+.dropdown li {
+    padding-top: 8px;
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.has-dropdown:hover .dropdown li,
+.has-dropdown:focus-within .dropdown li {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 時間差で表示 */
+.dropdown li:nth-child(1) {
+    transition-delay: 0.05s;
+}
+
+.dropdown li:nth-child(2) {
+    transition-delay: 0.1s;
+}
+
+.dropdown li:nth-child(3) {
+    transition-delay: 0.15s;
+}
+
+.dropdown li:nth-child(4) {
+    transition-delay: 0.2s;
+}
+
+.dropdown li:nth-child(5) {
+    transition-delay: 0.25s;
 }
 
 .dropdown li a {
@@ -517,62 +553,16 @@ ul {
     transition: background-color 0.3s ease;
 }
 
-
 .dropdown li a:hover {
     background-color: var(--sub-color);
     color: #fff;
 }
 
-.dropdown li {
-    padding-top: 8px;
-
-    opacity: 0;
-    transform: translateY(-5px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.has-dropdown:hover .dropdown li {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* 1つ目 */
-.dropdown li:nth-child(1) {
-    transition-delay: 0.05s;
-}
-
-/* 2つ目 */
-.dropdown li:nth-child(2) {
-    transition-delay: 0.1s;
-}
-
-/* 3つ目 */
-.dropdown li:nth-child(3) {
-    transition-delay: 0.15s;
-}
-
-/* 4つ目 */
-.dropdown li:nth-child(4) {
-    transition-delay: 0.2s;
-}
-
-/* 5つ目 */
-.dropdown li:nth-child(5) {
-    transition-delay: 0.25s;
-}
-
-.view-box {
-    border: 2px solid #000;
-    display: inline-block;
-    background-color: #fff;
-    padding: 1rem;
-    box-shadow: 5px 5px 0px rgba(0, 0, 0, 1);
-}
-
-/* 入力フォーム */
+/* ---------- （5）フォームのフォーカス演出 ---------- */
 .form-item {
     position: relative;
     width: 300px;
+    max-width: 100%;
 }
 
 .form-item input {
@@ -580,6 +570,8 @@ ul {
     padding: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    font-size: 16px;
+    /* iOSでフォーカス時に拡大されないよう16px以上にする */
 }
 
 .form-item label {
@@ -592,23 +584,22 @@ ul {
 }
 
 /* フォーカス中 または 入力済み */
-
-.form-item input:focus+label,
-.form-item input:valid+label {
+.form-item input:focus + label,
+.form-item input:valid + label {
     top: -10px;
     left: 10px;
-    background-color: #fff;
     padding: 0 5px;
-    color: #256AFF;
+    background-color: #fff;
+    color: var(--main-color);
     font-size: 12px;
 }
 
 .form-item input:focus {
-    border-color: #256AFF;
+    border-color: var(--main-color);
     outline: none;
 }
 
-/* トグルスイッチ */
+/* ---------- （6）トグルスイッチ ---------- */
 .toggle {
     position: relative;
     display: inline-block;
@@ -635,30 +626,31 @@ ul {
 .toggle-slider::before {
     content: "";
     position: absolute;
+    top: 4px;
+    left: 4px;
     width: 24px;
     height: 24px;
-    left: 4px;
-    top: 4px;
     background-color: var(--main-color);
     border-radius: 50%;
     transition: 0.3s;
 }
 
 /* ONになったとき */
-.toggle input:checked+.toggle-slider {
+.toggle input:checked + .toggle-slider {
     background-color: var(--sub-color);
 }
 
-/* ONになっとき、丸を右へ */
-.toggle input:checked+.toggle-slider::before {
+/* ONになったとき、丸を右へ */
+.toggle input:checked + .toggle-slider::before {
     transform: translateX(28px);
 }
 
-/* アコーディオン */
+/* ---------- （7）アコーディオン ---------- */
 .accordion {
+    width: 500px;
+    max-width: 100%;
     border: 1px solid #999;
     border-radius: 16px;
-    width: 500px;
 }
 
 .acc-input {
@@ -667,9 +659,10 @@ ul {
 
 .acc-title {
     position: relative;
-    font-weight: bold;
     display: block;
-    padding: 20px;
+    padding: 20px 48px 20px 20px;
+    /* 右側は「+」の分あける */
+    font-weight: bold;
     cursor: pointer;
     transition: color 0.3s ease;
 }
@@ -686,11 +679,10 @@ ul {
 }
 
 /* チェック後は× */
-.acc-input:checked+.acc-title::after {
+.acc-input:checked + .acc-title::after {
     transform: translateY(-50%) rotate(45deg);
 }
 
-/* ホバー */
 .acc-title:hover {
     color: var(--main-color);
 }
@@ -705,38 +697,40 @@ ul {
     overflow: hidden;
 }
 
-.acc-input:checked~.acc-body {
+.acc-input:checked ~ .acc-body {
     grid-template-rows: 1fr;
 }
 
 .acc-inner p {
-    margin: 0;
     padding: 20px;
 }
 
-/* アニメーション */
-/* スピナー */
+/* =============================================
+   ANIMATION
+============================================= */
+
+/* ---------- （1）ローディング表現 ---------- */
 .animation-area {
-    background-color: #000000;
-    height: 120px;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 120px;
+    background-color: #000;
 }
 
+/* スピナー */
 .spinner {
     width: 40px;
     height: 40px;
     border: 4px solid #ccc;
     border-top-color: var(--main-color);
     border-radius: 50%;
-
     animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
     to {
-        transform: rotate(360deg)
+        transform: rotate(360deg);
     }
 }
 
@@ -753,7 +747,6 @@ ul {
     height: 10px;
     background-color: var(--main-color);
     border-radius: 50%;
-
     animation: dot 1s ease-in-out infinite;
 }
 
@@ -796,7 +789,6 @@ ul {
     height: 100%;
     background-color: var(--main-color);
     border-radius: 3px;
-
     animation: slide 1.5s ease-in-out infinite;
 }
 
@@ -825,7 +817,6 @@ ul {
     inset: 0;
     background-color: var(--main-color);
     border-radius: 50%;
-
     animation: pulse 1.5s ease-out infinite;
 }
 
@@ -841,7 +832,7 @@ ul {
     }
 }
 
-/* スケルトーンスクリーン */
+/* ---------- （2）スケルトンスクリーン ---------- */
 .flex-box {
     display: flex;
     align-items: flex-start;
@@ -894,13 +885,16 @@ ul {
 
 /* animation-area の代わり */
 .skeleton-card .skeleton-animation-area {
-    width: 100%;
-    min-height: 240px;
-    border-radius: 4px;
-
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    min-height: 240px;
+    border-radius: 4px;
+}
+
+.skeleton-card .animation-area {
+    background-color: transparent;
 }
 
 /* .pulse の代わり */
@@ -912,19 +906,12 @@ ul {
 
 /* VIEW CSS ボタンの代わり */
 .skeleton-button {
+    align-self: flex-start;
+    /* このボタンだけ左揃え */
     width: 90px;
     height: 32px;
     margin-top: 20px;
     border-radius: 4px;
-}
-
-.skeleton-card .animation-area {
-    background-color: transparent;
-}
-
-.skeleton-card .skeleton-button {
-    align-self: flex-start;
-    /* このボタンだけ左揃え */
 }
 
 @keyframes skeleton-loading {
@@ -954,7 +941,7 @@ ul {
     }
 }
 
-/* 時間差登場 */
+/* ---------- （3）登場演出（フェードイン＋時間差） ---------- */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -1027,5 +1014,330 @@ ul {
     .image-list img {
         width: auto;
         max-width: 280px;
+    }
+}
+
+/* ---------- （4）流れるお知らせ ---------- */
+/* お知らせの表示範囲 */
+.marquee {
+    overflow: hidden;
+    width: 100%;
+    padding: 16px 0;
+    background-color: #333;
+}
+
+/* 横に流れる全体 */
+.marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 18s linear infinite;
+}
+
+/* お知らせ1件分 */
+.marquee-content {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-right: 60px;
+    white-space: nowrap;
+}
+
+/* NEWSラベル */
+.news-label {
+    padding: 4px 10px;
+    background-color: #333;
+    color: var(--sub-color);
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* 日付・本文 */
+.news-date,
+.news-text {
+    color: var(--sub-color);
+    font-size: 14px;
+}
+
+@keyframes marquee {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/* マウスを乗せると停止 */
+.marquee:hover .marquee-track {
+    animation-play-state: paused;
+}
+
+/* ---------- （5）テキスト演出（タイプライター風） ---------- */
+.typing-container {
+    padding: 30px;
+}
+
+/* チェックボックスを非表示にする */
+.replay-toggle {
+    position: absolute;
+    opacity: 0;
+}
+
+/* テキストの表示範囲 */
+.typing-window {
+    overflow: hidden;
+}
+
+.typing-text {
+    display: inline-block;
+    width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    color: #000;
+    font-size: 24px;
+    font-weight: bold;
+    border-right: 2px solid #000;
+    animation:
+        typing 3s steps(15, end) forwards,
+        blink 0.7s step-end infinite;
+}
+
+/* 文字を表示する */
+@keyframes typing {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 15em;
+    }
+}
+
+/* カーソルを点滅させる */
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    }
+}
+
+.replay-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    color: #fff;
+    background: var(--main-color);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* チェックすると文字を消す */
+.replay-toggle:checked ~ .typing-window .typing-text {
+    animation: none;
+    width: 0;
+}
+
+/* ---------- （6）画面に入ったらふわっと表示 ---------- */
+.reveal-flex {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.reveal-up,
+.reveal-scale,
+.reveal-slide {
+    display: block;
+    padding: 8px;
+    border: var(--border);
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: view();
+    animation-range: entry 10% cover 35%;
+}
+
+/* ① 下から現れる */
+@keyframes reveal-up {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.reveal-up {
+    animation-name: reveal-up;
+}
+
+/* ② 拡大しながら現れる */
+@keyframes reveal-scale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.reveal-scale {
+    animation-name: reveal-scale;
+}
+
+/* ③ 横から滑り込む */
+@keyframes reveal-slide {
+    from {
+        opacity: 0;
+        transform: translateX(-60px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.reveal-slide {
+    animation-name: reveal-slide;
+}
+
+/* ---------- （7）回転する光の枠線（@property） ---------- */
+.glow-flex {
+    display: flex;
+    gap: 24px;
+}
+
+@property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@keyframes rotate-angle {
+    to {
+        --angle: 360deg;
+    }
+}
+
+.glow-card {
+    flex: 1;
+    position: relative;
+    padding: 3px;
+    border-radius: 16px;
+    background: conic-gradient(from var(--angle),
+            #00FFFF,
+            #0066FF,
+            #FF00FF,
+            #FFFF00,
+            #00FFFF);
+}
+
+/* 光のにじみ */
+.glow-card::before {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    z-index: -1;
+    border-radius: inherit;
+    background: conic-gradient(from var(--angle),
+            #00FFFF,
+            #0066FF,
+            #FF00FF,
+            #FFFF00,
+            #00FFFF);
+    filter: blur(8px);
+    opacity: 0.7;
+}
+
+.glow-card__content {
+    position: relative;
+    z-index: 1;
+    min-height: 200px;
+    padding: 40px;
+    border-radius: 13px;
+    background: #fff;
+    color: #222;
+}
+
+.glow-card--auto {
+    animation: rotate-angle 8s linear infinite;
+}
+
+.glow-card--hover:hover {
+    animation: rotate-angle 8s linear infinite;
+}
+
+/* =============================================
+   レスポンシブ
+============================================= */
+/* タブレット以下 */
+@media (max-width: 768px) {
+    .glow-flex {
+        flex-direction: column;
+    }
+
+    .glow-card__content {
+        min-height: auto;
+        padding: 24px;
+    }
+}
+
+/* スマホ */
+@media (max-width: 600px) {
+    .section + .title-box {
+        margin-top: 40px;
+    }
+
+    .card-title,
+    .sub-title {
+        font-size: 18px;
+    }
+
+    /* カードは横幅いっぱい */
+    .button-list-card,
+    .hover-card,
+    .flex-box .button-list-card {
+        width: 100%;
+        min-height: auto;
+    }
+
+    .code-box pre {
+        font-size: 12px;
+    }
+
+    .view-box {
+        padding: 0.75rem 1rem;
+    }
+
+    /* ナビ */
+    .nav-lists {
+        gap: 0;
+        font-size: 14px;
+    }
+
+    .nav-list {
+        padding: 12px;
+    }
+
+    .nav-list > a::after {
+        bottom: 8px;
+    }
+
+    .form-item {
+        width: 100%;
+    }
+
+    .typing-container {
+        padding: 16px 0;
+    }
+
+    .typing-text {
+        font-size: 18px;
     }
 }
